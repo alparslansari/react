@@ -13,3 +13,4 @@ Use of multiple lines also is possible.
 
 const html = `<div>${Math.random()}</div>`;
 
+html
