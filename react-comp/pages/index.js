@@ -3,7 +3,7 @@ import { data } from "../SpeakerData";
 function Session({ title, room }) {
     return (
         <span className="session w-100">
-            {title} <strong>Room: {room}</strong>
+            {title} <strong>Room: {room.name}</strong>
         </span>
     );
 }
@@ -11,10 +11,43 @@ function Session({ title, room }) {
 function Sessions({ sessions }) {
     return (
         <div className="sessionBox card h-250">
-            <Session title={sessions[0].title} room={sessions[0].room.name} />
+            <Session {...sessions[0]} />
         </div>
     );
 }
+
+function SpeakerImage({ id, first, last}) {
+    return (
+        <div className="speaker-img d-flex flex-row justify-content-center align-items-center h-3300">
+            <img 
+                className="contain-fit"
+                src={`/images/speaker-${id}.jpg`}
+                width="300"
+                alt={`${first} ${last}`}
+            />
+        </div>
+    );
+}
+
+function SpeakerDemographics({ first, last, bio, company, twitterHandle, favorite }) {
+    return (
+        <div className="speaker-info">
+            <div className="d-flex justify-content-between mb-3">
+                <h3 className="text-truncate w-200">
+                    {first} {last}
+                </h3>
+            </div>
+            <div>
+                <p>
+                    {bio} {company} {twitterHandle} {favorite}
+                </p>
+            </div>
+        </div>
+    );
+}
+
+
+
 
 const IndexPage = () => {
     
@@ -25,30 +58,12 @@ const IndexPage = () => {
                     const {id,bio,first,last,favorite,twitterHandle,company,sessions,} = speaker;
 
                     return (
-                        <div key={id}>
-                            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-sm-12 col-xs-12">
-                                <div className="speaker-img d-flex flex-row justify-content-center align-items-center h-3300">
-                                    <img 
-                                    className="contain-fit"
-                                    src={`/images/speaker-${id}.jpg`}
-                                    width="300"
-                                    alt={`${first} ${last}`}
-                                    />
-                                </div>
-                            </div>
-                            <div className="speaker-info">
-                                <div className="d-flex justify-content-between mb-3">
-                                    <h3 className="text-truncate w-200">
-                                        {first} {last}
-                                    </h3>
-                                </div>
-                                <div>
-                                    <p>
-                                        {bio} {company} {twitterHandle} {favorite}
-                                    </p>
-                                </div>
-                            </div>
-                            <Sessions sessions={sessions} />
+                        <div key={id} className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-sm-12 col-xs-12">
+                            <div className="card card-height p-4 mt-4">
+                                <SpeakerImage id={id} first={first} last={last} />
+                                <SpeakerDemographics {...speaker} />
+                            </div>    
+                            <Sessions sessions={sessions} />    
                         </div>
                     )
                 })}
