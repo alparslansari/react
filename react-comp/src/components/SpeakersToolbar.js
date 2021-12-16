@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 
-function SpeakersToolbar({theme, setTheme}) {
 
-const [showSessions, setShowSessions] = useState(true); // set initial value
+function SpeakersToolbar({theme, setTheme, showSessions, setShowSessions}) {
+
+
 
 
     return(
