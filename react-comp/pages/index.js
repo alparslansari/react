@@ -1,4 +1,4 @@
-import Speakers from "../src/components/App";
+import App from "../src/components/App";
 
 const IndexPage = () => {
     
