@@ -5,7 +5,7 @@ import SpeakersToolbar from './SpeakersToolbar';
 import React, { useState } from "react";
 
 
-function Speakers() {
+function App() {
     const [theme, setTheme] = useState("light");
     return (
         <div className={
@@ -18,4 +18,4 @@ function Speakers() {
     );
 }
 
-export default Speakers;
+export default App;
