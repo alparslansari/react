@@ -12,10 +12,18 @@ function SpeakersList({ showSessions }) {
 
     useEffect(() =>{
         async function delayFunc(){
-            await delay(2000); // code waits 2 seconds
-            setIsLoading(false);
-            setSpeakersData(data);
-            console.log("useEffect");
+            try {
+                await delay(2000); // code waits 2 seconds
+                throw "Had Error.";
+                setIsLoading(false);
+                setSpeakersData(data);
+                console.log("useEffect");
+            } catch(e){
+                setIsLoading(false);
+                setHasErrored(true);
+                setError(e);
+            }
+            
         }
         delayFunc();
     }); // use effect runs for every rerender like click events etc.
@@ -35,6 +43,14 @@ function SpeakersList({ showSessions }) {
         });
 
         setSpeakersData(speakersDataNew);
+    }
+
+    if (hasErrored === true) {
+        return (
+            <div className='text-danger'>
+                ERROR: <b>loading Speaker Data Failed {error}</b>
+            </div>
+        )
     }
 
     if (isLoading === true) return <div>Loading...</div>
