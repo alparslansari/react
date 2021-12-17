@@ -4,12 +4,16 @@ import { useState, useEffect } from "react";
 
 function SpeakersList({ showSessions }) {
     const [speakersData, setSpeakersData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [hasErrored, setHasErrored] = useState(false);
+    const [error, setError] = useState("");
 
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     useEffect(() =>{
         async function delayFunc(){
             await delay(2000); // code waits 2 seconds
+            setIsLoading(false);
             setSpeakersData(data);
             console.log("useEffect");
         }
@@ -32,6 +36,8 @@ function SpeakersList({ showSessions }) {
 
         setSpeakersData(speakersDataNew);
     }
+
+    if (isLoading === true) return <div>Loading...</div>
 
     return(
         <div className="container speakers-list">
