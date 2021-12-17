@@ -1,6 +1,7 @@
 import Speaker from './Speaker'
 import { data } from '../../SpeakerData';
 import { useState, useEffect } from "react";
+import ReactPlaceHolder from 'react-placeholder';
 
 function SpeakersList({ showSessions }) {
     const [speakersData, setSpeakersData] = useState([]);
@@ -14,7 +15,7 @@ function SpeakersList({ showSessions }) {
         async function delayFunc(){
             try {
                 await delay(2000); // code waits 2 seconds
-                throw "Had Error.";
+                //throw "Had Error.";
                 setIsLoading(false);
                 setSpeakersData(data);
                 console.log("useEffect");
@@ -53,10 +54,11 @@ function SpeakersList({ showSessions }) {
         )
     }
 
-    if (isLoading === true) return <div>Loading...</div>
+    //if (isLoading === true) return <div>Loading...</div>
 
     return(
         <div className="container speakers-list">
+            <ReactPlaceHolder type="media" rows={15} className="speakerlist-placeholder" ready={isLoading === false}>
             <div className="row">
                 {speakersData.map(function (speaker){
                     return (
@@ -67,6 +69,7 @@ function SpeakersList({ showSessions }) {
                     );
                 })}
             </div>
+            </ReactPlaceHolder>
         </div>
     );
 }
